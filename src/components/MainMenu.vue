@@ -18,7 +18,7 @@
                    class="navbar-brand"
                    to="/">
                     <img :src="$assets.logo">
-                    <span class="beta-mark">BETA</span>
+                    <span class="beta-mark">2.0</span>
                 </router-link>
             </div>
 
