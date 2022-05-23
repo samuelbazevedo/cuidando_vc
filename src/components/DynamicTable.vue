@@ -18,7 +18,7 @@
                     {{ row.ds_projeto_atividade }}</router-link>
                 </td>
                 <td class="text-right">
-                    {{ formatCur(calcPlanejado(row.sld_orcado_ano, row.vl_atualizado)) }}
+                    {{ formatCur(calcPlanejado((row.sld_orcado_ano ? row.sld_orcado_ano : row.vl_orcado_ano), row.vl_atualizado)) }}
                 </td>
                 <td class="text-right">
                     {{ formatCur(row.vl_empenhadoliquido) }}

@@ -51,7 +51,7 @@ export default {
     // keys () { return Object.keys(this.pointInfo) },
     values () {
       var values = {}
-      values.planejado = this.pointInfo.sld_orcado_ano
+       values.planejado = this.pointInfo.sld_orcado_ano ? this.pointInfo.sld_orcado_ano : this.pointInfo.vl_orcado_ano
       if (this.pointInfo.vl_atualizado) values.planejado = this.pointInfo.vl_atualizado
       values.empenhado = this.pointInfo.vl_empenhadoliquido
       values.liquidado = this.pointInfo.vl_liquidado
