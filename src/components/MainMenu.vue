@@ -34,13 +34,7 @@
                   </li>
 
                   <li><a href="http://blog.cuidando.vc" target="_blank">Blog</a></li>
-
-                    <li>
-                        <a :href="shareLink">
-                            {{ $t('Share') }}
-                        </a>
-                    </li>
-
+                  
                     <li v-if="username">
                         <router-link :to="{ name: 'pessoa', params: { viewingUser: username } }">
                         {{ username }}
@@ -55,9 +49,9 @@
                         {{ $t("Logout") }}
                     </a></li>
 
-                    <li>
+                    <!-- <li>
                       <styled-select :options="langs" :value="$i18n.locale" @input="selectedLang"/>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>

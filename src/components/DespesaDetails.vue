@@ -3,7 +3,7 @@
     <div class="top-bar orgao-box">
         <span class="block-decorator"/>
         <span class="key">{{ $t('Accountable body') }}: </span>
-        <span class="value">{{ pointInfo.ds_orgao }}</span>
+        <span class="value subtitle_orgao">{{ pointInfo.ds_orgao }}</span>
     </div>
 
     <ul class="list-bare top-bar bottom-bar despesa-details-list">
@@ -17,8 +17,8 @@
         </li>
 
         <li><a href="http://e-negocioscidadesp.prefeitura.sp.gov.br/BuscaLicitacao.aspx" target="_blank">Licitações - Pesquise aqui</a></li>
-        <li><a href="http://transparencia.prefeitura.sp.gov.br/contas/Paginas/Contratos-v2.aspx" target="_blank">Contratos - Pesquise aqui</a></li>
-        <li><a href="https://www.instantstreetview.com/@{ this.pointInfo.geometry.coordinates[1] },{ this.pointInfo.geometry.coordinates[0] },0h,0p,1z" target="_blank">Visão da rua</a></li>
+        <li><a href="http://transparencia.prefeitura.sp.gov.br/contratos-convenios-e-compras-publicas/#tipo" target="_blank">Contratos - Pesquise aqui</a></li>
+        <li><a :href="'https://www.instantstreetview.com/@' + pointInfo.geometry.coordinates[1] + ',' + pointInfo.geometry.coordinates[0] + ',0h,0p,1z'" target="_blank">Visão da rua</a></li>
 
         <a v-if="!showAllInfo"
             class="small-font"
@@ -76,3 +76,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .subtitle_orgao {
+    color: #6c6c6c;
+  }
+</style>
