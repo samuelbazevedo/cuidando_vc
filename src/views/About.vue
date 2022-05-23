@@ -2,9 +2,45 @@
   <div class="about container">
     <h1>Cuidando do Meu Bairro</h1>
 
-    <p>Este projeto ainda está em desenvolvimento, mas o código fonte dele pode ser encontrado aqui: <a href="http://repo.cuidando.vc" target="_blank">repositório</a>. E temos um <a href="http://blog.cuidando.vc" target="_blank">blog</a> também.</p>
-    <p>Para entrar em contato conosco, pode nos enviar um e-mail. Nosso endereço é <b>ola</b> seguido do caracter arroba e, por fim, <b>cuidando.vc</b></p>
-
+    <h1 class="pg-about__title text-neutral-base text-4xl font-bold">
+    Cuidando do Meu Bairro
+    </h1>
+    <div class="pg-about__content text-neutral-light text-lg mt-2">
+        <p>
+            Buscando contribuir na legibilidade da informação orçamentária ao público, o projeto Cuidando do Meu Bairro apresenta dados de execução orçamentária no mapa da cidade de São Paulo através da geocodificação, a fim de aproximar a cidadania ao acompanhamento em tempo real dos gastos públicos na cidade de São Paulo. A plataforma Cuidando do Meu Bairro (CMB), que em 2022 completa 10 anos de operação, recebeu a menção honrosa do Prêmio Luís Fernando de Computação, veja a notícia <a
+            class="underline text-secondary-base"
+            href="http://www5.each.usp.br/noticias/projeto-cuidando-do-meu-bairro-recebe-mencao-honrosa-no-premio-luiz-fernando-de-computacao/"
+            target="_blank"
+            >aqui</a
+            >.
+        </p>
+        <p class="text-neutral-base mt-5">
+            Acesse nosso blog clicando
+            <a
+            class="underline text-secondary-base"
+            href="https://colab.each.usp.br/blog/tag/cuidando-do-meu-bairro/"
+            target="_blank"
+            >aqui</a
+            >.
+        </p>
+        <p class="text-neutral-base">
+            Caso queira contribuir com nosso projeto, acesse o nosso
+            <a
+            class="underline text-secondary-base"
+            href="https://gitlab.com/cuidandodomeubairro"
+            target="_blank"
+            >Gitlab</a
+            >.
+        </p>
+        <p class="text-neutral-base">
+            Para entrar em contato conosco, pode nos enviar um e-mail:
+            <a
+            class="underline text-secondary-base"
+            href="mailto:ola@cuidando.vc"
+            >ola@cuidando.vc</a
+            >.
+        </p>
+    </div>
     <p>Implementado por:</p>
     <ul>
         <li>Fernando Ferreira Diniz de Moraes</li>
@@ -13,6 +49,7 @@
         <li>Sol Lima</li>
         <li>Alexandre Souza</li>
         <li>Renan de Sousa Ferreira</li>
+        <li><a href="https://github.com/vanessa-nascimento" target="_blank">Vanessa Alves do Nascimento</a></li>
     </ul>
 
     <p>Colaboração:</p>
@@ -25,7 +62,7 @@
 
     <h2>Parceiros</h2>
 
-    <ul class="list-bare logos-list">
+    <ul class="list-bare logos-list list__parterns">
         <li>
             <a href="http://avinaamericas.org" target="_blank">
                 <img style="height:80px" src="../assets/logos/avina.png">
@@ -83,3 +120,11 @@
     <p>À equipe reserva-se o direito de eliminar sem consulta toda e qualquer postagem de conteúdo, no todo ou em parte, que fira diretamente as regras acima estabelecidas.</p>
   </div>
 </template>
+
+<style lang="scss">
+    @media only screen and (min-width: 800px) {
+        .list__parterns {
+            display: flex;
+        }
+    }
+</style>
