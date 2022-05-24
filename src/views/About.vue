@@ -1,10 +1,6 @@
 <template>
   <div class="about container">
     <h1>Cuidando do Meu Bairro</h1>
-
-    <h1 class="pg-about__title text-neutral-base text-4xl font-bold">
-    Cuidando do Meu Bairro
-    </h1>
     <div class="pg-about__content text-neutral-light text-lg mt-2">
         <p>
             Buscando contribuir na legibilidade da informação orçamentária ao público, o projeto Cuidando do Meu Bairro apresenta dados de execução orçamentária no mapa da cidade de São Paulo através da geocodificação, a fim de aproximar a cidadania ao acompanhamento em tempo real dos gastos públicos na cidade de São Paulo. A plataforma Cuidando do Meu Bairro (CMB), que em 2022 completa 10 anos de operação, recebeu a menção honrosa do Prêmio Luís Fernando de Computação, veja a notícia <a
@@ -92,7 +88,7 @@
 
     <h2>Apoio</h2>
 
-    <ul class="list-bare logos-list">
+    <ul class="list-bare logos-list list__parterns">
         <li>
             <a href="//gandi.net" target="_blank">
                 <img style="height:80px" src="../assets/logos/gandi.png">
