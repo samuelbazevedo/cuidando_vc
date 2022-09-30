@@ -17,9 +17,9 @@
 
     <div class="map__card-content container mx-auto">
       <div v-if="expanded" class="my-auto mx-auto h-full lg:flex flex-col justify-center max-w-md lg:absolute">
-        <div class="bg-white lg:p-10 pt-10 pb-3 mb-5 lg:rounded-lg lg:shadow-lg">
+        <div class="bg-white lg:pb-10 lg:p-10 pt-10 pb-3 mb-5 lg:rounded-lg lg:shadow-lg">
           <div class="c-map__title mb-5">
-          <h1 class="text-neutral-base lg:text-4xl lg:text-left text-center text-xl font-bold">Acompanhe os gastos públicos da cidade de São Paulo em tempo real</h1>
+          <h1 class="text-neutral-base lg:text-3xl lg:text-left text-center text-xl font-bold">Acompanhe os gastos públicos da cidade de São Paulo em tempo real</h1>
           <p class="text-neutral-light lg:text-base lg:text-left text-center text-sm mt-2">O projeto Cuidando do Meu Bairro propõe tornar mais inteligível a visualização dos dados das despesas públicas a partir da geolocalização dos gastos</p>
         </div>
         <div class="">
@@ -48,7 +48,7 @@
                 focused
               />
           </div>
-          <div class="c-map__year-submit grid grid-cols-2 gap-4">
+          <div class="c-map__year-submit grid grid-cols-2 gap-4 h-8">
             <div>
               <year-select class="w-44" />
             </div>
@@ -263,7 +263,7 @@ export default {
     &.expanded-map {
       width: 100%;
       margin: 0px;
-      height: 65vh;
+      height: 75vh;
       position: relative;
     }
   }
