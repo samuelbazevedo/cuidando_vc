@@ -13,9 +13,16 @@ import SpinnerAnim from '@/components/SpinnerAnim'
 
 import 'leaflet/dist/leaflet.css'
 import 'leaflet.markercluster/dist/MarkerCluster.css'
-import '@/css/app.sass'
+
+import '@/assets/styles/fonts.css'
+import "@/assets/styles/tailwind.css"
 
 import L from 'leaflet'
+import 'flowbite'
+import './assets/tailwind.css'
+
+import '@/assets/styles/main.css'
+
 
 delete L.Icon.Default.prototype._getIconUrl
 

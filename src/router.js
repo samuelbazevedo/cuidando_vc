@@ -29,13 +29,19 @@ let router = new Router({
       component: Pessoa
     },
     {
-      path: '/sobre',
-      name: 'about',
-      // components: About
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue')
+      path: "/sobre",
+      name: "Sobre",
+      component: () => import(/* webpackChunkName: "about" */ '@/views/About.vue'),
+    },
+    {
+      path: "/glossario",
+      name: "Glossário - Orçamento Público",
+      component: () => import(/* webpackChunkName: "about" */ '@/views/Glossario.vue'),
+    },
+    {
+      path: "/termos-de-uso",
+      name: "Termos de Uso",
+      component: () => import(/* webpackChunkName: "about" */ '@/views/TermsOfUse.vue'),
     },
     {
       path: '/analises',

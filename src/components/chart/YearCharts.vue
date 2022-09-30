@@ -3,24 +3,24 @@
         <div class="col-lg-6 margin-bottom">
             <div class="inline-block donut-group not-mapped">
                 <labeled-doughnut :color="$assets.patNM" :percentage="perNotMapped"/>
-                <p class="abs-number">{{rowsNotMapped}}</p>
-                <p>{{ $t('Not mapped') }}</p>
+                <p class="text-secondary-base font-bold text-xl">{{rowsNotMapped}}</p>
+                <p class="text-secondary-base font-bold text-sm">{{ $t('Not mapped') }}</p>
             </div>
             <div class="inline-block donut-group mapped">
                 <labeled-doughnut :color="$assets.patM" :percentage="perMapped"/>
-                <p class="abs-number">{{rowsMapped}}</p>
-                <p>{{ $t('Mapped') }}</p>
+                <p class="text-primary-base font-bold text-xl">{{rowsMapped}}</p>
+                <p class="text-primary-base font-bold text-sm">{{ $t('Mapped') }}</p>
             </div>
         </div>
 
-        <div class="col-lg-6">
+        <div class="col-lg-6 mt-10 hidden">
             <div class="inline-block values-block">
-                <div v-for="(v, i) of values" :key="i" class="value-block">
-                    <div class="icon-block">
-                        <img :src="$assets[v.name]">
-                        <span class="capitalize block">{{ $t(v.name) }}</span>
+                <div v-for="(v, i) of values" :key="i" class="value-block flex justify-center items-center py-5 border-b border-gray-200">
+                    <div class="icon-block text-center ">
+                        <img :src="$assets[v.name]" class="w-5">
+                        <span class="capitalize text-center text-neutral-base">{{ $t(v.name) }}</span>
                     </div>
-                    <div class="bar-block">
+                    <div class="bar-block inline-block">
                         <hor-bar :color="$assets.patNM"
                               extraclass="not-mapped"
                               :title="$t('Not mapped')"
@@ -93,3 +93,26 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+  .canvas-wrapper {
+    display: table;
+    font-size: 20pt;
+    height: 200px;
+    width: 200px;
+  }
+  canvas.donut {
+    position: absolute;
+  }
+  .canvas-text {
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 20pt;
+    color: #6c6c6c;
+  }
+  .donut-group {
+    font-weight: 700;
+    width: 200px;
+  }
+</style>

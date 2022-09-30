@@ -1,17 +1,19 @@
 <template>
   <div class="perguntas">
 
-    <div class="row">
-        <div class="col-sm-8">
-            <h2>{{ $t('want_to_question?') }}</h2>
+    <div class="row flex items-center justify-between border-b border-gray-100 pb-5">
+        <div class="">
+            <h2 class="text-neutral-base font-semibold text-xl">{{ $t('want_to_question?') }}</h2>
+            <p class="text-neutral-light">Essa pergunta será enviada diretamente ao órgão responsável via e-SIC</p>
         </div>
 
-        <div class="col-sm-4 new-perg-button">
-            <button @click="openModal('pergunta')"
-                    @focus="requireLogin"
-                    class="btn btn-color-sec block-right">
-                {{ $t('Make a question') }}
-                <span class="right-arrow"/>
+        <div class="new-perg-button text-right">
+            <button 
+              @click="username ? requireLogin : openModal('pergunta')"
+              class="btn btn-color-sec relative text-right text-white px-3 py-2 cursor-pointer bg-secondary-light font-light hover:bg-secondary-base rounded">
+              {{ $t('Make a question') }}
+              <span class="right-arrow"
+            />
             </button>
         </div>
     </div>
@@ -54,7 +56,8 @@ export default {
   computed: {
     ...mapState({
       pedidos: state => state.esic.pedidos,
-      prepedidos: state => state.esic.prepedidos
+      prepedidos: state => state.esic.prepedidos,
+      username: state => state.auth.username,
     })
   },
   methods: {
@@ -62,6 +65,9 @@ export default {
     checkSubscribed () {
     },
     subscribe () {
+    },
+    openModalQuestion () {
+      this.openModal('pergunta')
     },
     ...mapActions(['requireLogin']),
     ...mapMutations(['openModal'])

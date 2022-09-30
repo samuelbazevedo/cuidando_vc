@@ -1,57 +1,89 @@
 <template>
   <div>
     <div class="table-responsive">
-        <table class="table table-hover">
-            <tr>
-                <th class="text-left relative">
-                    {{ $t('description') }}
-                    <span class="table-header-mark"/>
-                </th>
-                <th>{{ $t('planned') }}</th>
-                <th>{{ $t('committed') }}</th>
-                <th>{{ $t('finished') }}</th>
-                <th class="text-left">{{ $t('body') }}</th>
-            </tr>
-            <tr v-for="(row, i) in pageData.data" :key="i">
-                <td class="main-cell">
-                  <router-link :to="{ name: 'despesa', params: { code: row.code } }">
-                    {{ row.ds_projeto_atividade }}</router-link>
-                </td>
-                <td class="text-right">
-                    {{ formatCur(calcPlanejado((row.sld_orcado_ano ? row.sld_orcado_ano : row.vl_orcado_ano), row.vl_atualizado)) }}
-                </td>
-                <td class="text-right">
-                    {{ formatCur(row.vl_empenhadoliquido) }}
-                </td>
-                <td class="text-right">
-                    {{ formatCur(row.vl_liquidado) }}
-                </td>
-                <td>{{ row.ds_orgao }}</td>
-            </tr>
-        </table>
+        <div class="flex flex-col">
+          <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+              <div class="overflow-hidden">
+                <table class="min-w-full">
+                  <thead class="bg-white border-b">
+                    <tr>
+                      <th class="text-left text-neutral-base px-6 py-4">{{ $t('description') }}</th>
+                      <th scope="col" class="text-sm font-medium text-neutral-base px-6 py-4 text-left">
+                        {{ $t('planned') }}
+                      </th>
+                      <th scope="col" class="text-sm font-medium text-neutral-base px-6 py-4 text-left">
+                        {{ $t('committed') }}
+                      </th>
+                      <th scope="col" class="text-sm font-medium text-neutral-base px-6 py-4 text-left">
+                        {{ $t('finished') }}
+                      </th>
+                      <th scope="col" class="text-sm font-medium text-neutral-base px-6 py-4 text-left">
+                        {{ $t('body') }}
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="(row, i) in pageData.data" :key="i" class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                      <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-secondary-base underline">
+                        <router-link :to="{ name: 'despesa', params: { code: row.code } }">
+                          {{ row.ds_projeto_atividade }}
+                        </router-link>
+                      </td>
+                      <td class="text-sm text-neutral-base font-light px-6 py-4 whitespace-nowrap">
+                        {{ formatCur(calcPlanejado((row.sld_orcado_ano ? row.sld_orcado_ano : row.vl_orcado_ano), row.vl_atualizado)) }}
+                      </td>
+                      <td class="text-sm text-neutral-base font-light px-6 py-4 whitespace-nowrap">
+                        {{ formatCur(row.vl_empenhadoliquido) }}
+                      </td>
+                      <td class="text-sm text-neutral-base font-light px-6 py-4 whitespace-nowrap">
+                        {{ formatCur(row.vl_liquidado) }}
+                      </td>
+                      <td class="text-sm text-neutral-base font-light px-6 py-4 whitespace-nowrap">
+                        {{ row.ds_orgao }}
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
     </div>
-    <div class="text-right table-controls">
-        <router-link :to="{ params: { page: 0 } }"
-            v-if="currPage !== 0 && !pageIndexes.includes(0)">{{ $t('first') }}</router-link>
-        <router-link v-for="num in pageIndexes" :key="num"
+    <nav aria-label="Table navigation" class="mt-5 mb-10 flex justify-end">
+      <ul class="inline-flex -space-x-px">
+      <li aria-controls="my-table">
+          <router-link :to="{ params: { page: 1 } }"
+            class="py-2 px-3 leading-tight text-gray-500 bg-white rounded-l-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+            :class="{ 'bg-gray-100': currPage === 1 }">{{ $t('first') }}</router-link>
+        </li>
+        <li>
+          <router-link v-for="num in pageIndexes" :key="num"
             :to="{ params: { page: num } }"
-            :class="{ disabled: num === currPage }"
-            role="button">{{ num + 1 }}</router-link>
-        <router-link
+            :class="{ 'bg-gray-100': num === currPage }"
+            class="py-2 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+            role="button">{{ num }}</router-link>
+        </li>
+        <li>
+          <router-link
             :to="{ params: { page: lastPage } }"
-            v-if="currPage !== lastPage && !pageIndexes.includes(lastPage)">{{ $t('last') }}</router-link>
-    </div>
+            class="py-2 px-3 leading-tight text-gray-500 bg-white rounded-r-lg border border-gray-300 hover:bg-gray-100 hover:text-gray-700"
+            :class="{ 'bg-gray-100': currPage === lastPage }"
+          >{{ $t('last') }}</router-link>
+        </li>
+      </ul>
+    </nav>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
 import { formatCur } from '@/utils'
+
 export default {
   name: 'dynamic-table',
   data () {
     return {
-      // defaultPage: 1,
       per_page_num: 25
     }
   },
@@ -62,13 +94,13 @@ export default {
     },
     pageIndexes () {
       // Page index numbers
-      let numShownPages = 7
+      let numShownPages = 5
       return Array(...Array(numShownPages))
         .map((_, i) => i + this.currPage - Math.floor(numShownPages / 2))
-        .filter(i => i >= 0 && i <= this.lastPage)
+        .filter(i => i > 1 && i < this.lastPage)
     },
     currPage () {
-      return this.routePage !== undefined ? this.routePage : 1
+      return this.routePage !== undefined ? parseInt(this.routePage) : 1
     },
     ...mapState({
       pageData: state => state.money.page,

@@ -1,43 +1,62 @@
 <template>
-  <div class="container">
-    <h2>Perguntas feitas por {{ $t(grouping) }}</h2>
+  <div class="pg-analisys">
+    <div class="container mx-auto my-20 h-full">
+      <h1 class="pg-analisys__title text-neutral-base text-4xl font-bold">
+        Perguntas feitas por {{ $t(grouping) }}
+      </h1>
+      <div class="pg-analisys__control-buttons mt-4 mb-2">
+        <span class="text-neutral-base">Selecione por:</span>
+        <button v-for="g of Object.keys(groupConfig)" :key="g"
+                class="pg-analisys__control-buttons-btn px-3 py-1 bg-secondary-light text-white rounded ml-2 hover:bg-secondary-base disabled:bg-secondary-base"
+                :disabled="grouping === g"
+                @click="getData(g)">
+          {{ $t(g) }}
+        </button>
+      </div>
+      <apexcharts v-if="esicStats.dates" height="400" type="line" :options="chartOptions" :series="series"></apexcharts>
 
-    <div class="control-buttons">
-      <button v-for="g of Object.keys(groupConfig)" :key="g"
-              class="btn btn-color-sec"
-              :disabled="grouping === g"
-              @click="getData(g)">
-        {{ $t(g) }}
-      </button>
+      <h2 class="pg-analisys__subtitle text-neutral-base text-3xl font-bold mt-6 mb-3">Perguntas feitas por órgão</h2>     
+      <div class="pg-analisys__table table-responsive">
+        <div class="flex flex-col">
+          <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+              <div class="overflow-hidden">
+                <table class="min-w-full">
+                  <thead class="bg-white border-b">
+                    <tr>
+                      <th scope="col" class="text-sm font-medium text-neutral-base px-6 py-4 text-left">
+                        Órgão
+                      </th>
+                      <th scope="col" class="text-sm font-medium text-neutral-base px-6 py-4 text-left">
+                        Número de Pedidos
+                      </th> 
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr v-for="row of esicStats.orgaos" :key="row.name" class="bg-white border-b transition duration-300 ease-in-out hover:bg-gray-100">
+                     <td class="text-sm text-neutral-base font-light px-6 py-4 whitespace-nowrap">{{ row.name }}</td>
+                      <td class="text-sm text-neutral-base font-light px-6 py-4 whitespace-nowrap">{{ row.count }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <apexcharts v-if="esicStats.dates" height="400" type="line" :options="chartOptions" :series="series"></apexcharts>
-
-    <h2>Perguntas feitas por órgão</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Órgão</th>
-          <th>Número de Pedidos</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="row of esicStats.orgaos" :key="row.name">
-          <td>{{ row.name }}</td>
-          <td class="text-center">{{ row.count }}</td>
-        </tr>
-      </tbody>
-    </table>
-
   </div>
 </template>
 
 <script>
 import VueApexCharts from 'vue-apexcharts'
 import { mapActions, mapState } from 'vuex'
+import FooterInfo from '../components/FooterInfo.vue'
 
 export default {
   components: {
-    apexcharts: VueApexCharts
+    apexcharts: VueApexCharts,
+    FooterInfo
   },
   data () {
     return {

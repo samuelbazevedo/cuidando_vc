@@ -1,50 +1,64 @@
 <template>
-  <div>
-    <div class="top-bar orgao-box">
-        <span class="block-decorator"/>
-        <span class="key">{{ $t('Accountable body') }}: </span>
-        <span class="value subtitle_orgao">{{ pointInfo.ds_orgao }}</span>
+  <div class="c-despesa-details">
+    <div class="c-despesa-details__orgao pt-5 border-t-2 mt-10">
+        <!-- <span class="block-decorator"/> falta icone -->
+        <p class="text-neutral-base font-semibold">{{ $t('Accountable body') }}</p>
+        <p class="text-neutral-light">{{ pointInfo.ds_orgao }}</p>
     </div>
 
     <ul class="list-bare top-bar bottom-bar despesa-details-list">
-        <li v-for="el of mainKeys" :key="el[0]">
-            <span class="key">{{ el[0] }}: </span>
-            <span>{{ el[1] }}</span>
+        <li v-for="el of mainKeys" :key="el[0]" class="my-5">
+            <p class="text-neutral-base font-semibold">{{ el[0] }}</p>
+            <p class="text-neutral-light">{{ el[1] }}</p>
         </li>
 
         <li v-for="empenho of empenhos" :key="empenho.codEmpenho">
           <a :href="'http://sfemp.prefeitura.sp.gov.br/extrato_empenho.aspx?Empenho=' + empenho.codEmpenho + '&Ano=' + empenho.anoEmpenho" target="_blank">Nota de empenho</a>
         </li>
-
-        <li><a href="http://e-negocioscidadesp.prefeitura.sp.gov.br/BuscaLicitacao.aspx" target="_blank">Licitações - Pesquise aqui</a></li>
-        <li><a href="http://transparencia.prefeitura.sp.gov.br/contratos-convenios-e-compras-publicas/#tipo" target="_blank">Contratos - Pesquise aqui</a></li>
-        <li><a :href="'https://www.instantstreetview.com/@' + pointInfo.geometry.coordinates[1] + ',' + pointInfo.geometry.coordinates[0] + ',0h,0p,1z'" target="_blank">Visão da rua</a></li>
-
-        <a v-if="!showAllInfo"
-            class="small-font"
-            @click="showAllInfo = true">
-            mais
-        </a>
-
     </ul>
 
-    <ul v-if="showAllInfo && pointInfo"
-        class="list-bare bottom-bar despesa-details-list">
-        <li v-for="key of keys" :key="key">
-            <span class="key">{{ key }}: </span>
-            <span>{{ pointInfo[key] }}</span>
-        </li>
-        <a v-if="showAllInfo"
-            class="small-font"
-            @click="showAllInfo = false">
-            esconder
-        </a>
-    </ul>
+    <div class="c-despesa-details__infos">
+        <p class="text-neutral-base font-semibold">Licitações</p>
+        <p class="text-neutral-light mb-3">Quer saber mais sobre o processo de licitações desta despesa?</p>
+        <a class=" text-secondary-base underline" href="http://e-negocioscidadesp.prefeitura.sp.gov.br/BuscaLicitacao.aspx" target="_blank">Pesquise licitações</a>
+        
+        <p class="text-neutral-base font-semibold mt-8">Contratos</p>
+         <p class="text-neutral-light mb-3">Quer saber mais sobre o processo de contratos desta despesa?</p>
+        <a class="text-secondary-base underline" href="http://transparencia.prefeitura.sp.gov.br/contratos-convenios-e-compras-publicas/#tipo" target="_blank">Pesquise contratos</a>
+        
+    </div>
+    <div class="c-despesa-details__code-information my-10">
+      <h3 class="text-neutral-base font-semibold text-xl">Mais informações</h3>
+      <p class="text-neutral-light mb-3">Aqui estão todas as informações mapeadas sobre essa despesa em formato JSON</p>
+      <button v-if="!showAllInfo"
+          class="bg-secondary-light text-white py-2 px-3 rounded font-light hover:bg-secondary-base"
+          @click="showAllInfo = true">
+          Mais informações
+      </button>
+      <button v-else
+        class="bg-secondary-light text-white py-2 px-3 rounded font-light hover:bg-secondary-base"
+        @click="showAllInfo = false">
+        Esconder informações
+      </button>
+      <div id="resultCode" class="mt-10" v-if="showAllInfo && pointInfo">
+        <code-highlight language="json">
+          {
+          <pre v-for="key of keys" :key="key">
+            "{{ key }}": "{{ pointInfo[key] }}"
+          </pre>
+          }
+        </code-highlight>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import CodeHighlight from "vue-code-highlight/src/CodeHighlight.vue";
+import "vue-code-highlight/themes/prism.css";
+import 'prism-es6/components/prism-json';
+
 export default {
   name: 'despesa-details',
   data () {
@@ -73,12 +87,9 @@ export default {
     })
   },
   methods: {
+  },
+  components: {
+    CodeHighlight,
   }
 }
 </script>
-
-<style lang="scss">
-  .subtitle_orgao {
-    color: #6c6c6c;
-  }
-</style>

@@ -1,156 +1,175 @@
 <template>
   <div v-if="userInfo">
-    <div class="top-bar relative margin-top">
-      <span class="block-decorator"/>
-      <h1>{{ userInfo.username }}</h1>
-
-      <!-- Description -->
-      <div v-if="isEditting !== 'description'">
-        <p v-if="userInfo.description">
-          {{ userInfo.description }}
-        </p>
-        <p v-else>
-          {{ $t('No user description...') }}
-        </p>
-        <div v-if="isUser && !isEditting">
-          <button class="btn btn-color-sec small-all-margin" @click="openEdit('description')">
-            {{ $t('edit') }}
-          </button>
-        </div>
-      </div>
-      <!-- Edit Description -->
-      <form class="form" v-else>
-        <div class="form-group">
-          <label class="sr-only" for="user-edit-description">
-            {{ $t('Description') }}
-          </label>
-          <textarea class="form-control"
-                    rows="3"
-                    id="user-edit-description"
-                    maxlength="500"
-                    v-model="description"
-                    :placeholder="$t('Description')"/>
-          <div class="control-buttons">
-            <button-spinner
-              type="submit"
-              :disabled="!description.length"
-              :condition="pending.sendEdit"
-              @click.prevent.native="sendEdit"
-              class="btn btn-color-sec">
-                {{ $t('Save') }}
-            </button-spinner>
-            <button class="btn btn-warning"
-                    @click.prevent="isEditting = null">
-                {{ $t('Cancel') }}
+    <div class="max-w-sm bg-white rounded-lg border border-gray-200 shadow-md">
+      <div class="flex flex-col pt-10 px-5 pb-14">
+        
+        <h2 class="text-neutral-base text-2xl font-bold">{{ userInfo.username }}</h2>
+        <div class="w-full">
+          <!-- Description -->
+          <div v-if="isEditting !== 'description'" class="text-neutral-light text-base mt-2">
+            <p v-if="userInfo.description">
+              {{ userInfo.description }}
+            </p>
+            <p v-else>
+              {{ $t('No user description') }}
+            </p>
+            <button 
+              v-if="isUser && !isEditting"
+              class="self-center mt-3 py-2 px-4 text-sm font-medium text-center text-white bg-secondary-light rounded-lg hover:bg-secondary-base"
+              @click="openEdit('description')"
+            >
+              {{ $t('edit') }}
             </button>
           </div>
+          <!-- Edit Description -->
+          <div v-else class="mt-2">
+            <div class="form-group form flex flex-col">
+              <label class="sr-only" for="user-edit-description">
+                {{ $t('Description') }}
+              </label>
+              <textarea 
+                rows="4" 
+                class="form-control block p-2.5 w-full text-sm text-neutral-base bg-gray-50 rounded-lg border border-gray-300 focus:ring-primary-base focus:border-primary-base"
+                id="user-edit-description"
+                maxlength="500"
+                v-model="description"
+                :placeholder="$t('Description')"
+              />
+              <div class="control-buttons">
+                <button-spinner
+                  type="submit"
+                  :disabled="!description.length"
+                  :condition="pending.sendEdit"
+                  @click.prevent.native="sendEdit"
+                  class="cursor-pointer self-center mt-3 py-2 px-3 text-sm font-medium text-center text-white bg-secondary-light rounded-lg hover:bg-secondary-base"
+                >
+                  {{ $t('Save') }}
+                </button-spinner>
+                <button 
+                  class="self-center mt-3 py-2 px-3 text-sm font-medium text-center text-secondary-light border border-secondary-light rounded-lg hover:bg-secondary-base hover:text-white"
+                  @click.prevent="isEditting = null"
+                >
+                  {{ $t('Cancel') }}
+                </button>
+              </div>
+            </div>
+          </div>
         </div>
-      </form>
-    </div>
+        <div class="top-bar bottom-bar private-info mt-8 pt-3 border-t border-gray-150 w-full" v-if="isUser">
+            <h3 class="text-neutral-base font-semibold text-lg mt-2">Informações pessoais</h3>
+            <h4 class="text-neutral-light text-sm mb-2">Elas estão visíveis apenas para você</h4>
 
-    <div class="top-bar bottom-bar private-info" v-if="isUser">
-
-        <p>{{ $t('private_data') }}:</p>
-
-        <!-- Email -->
-        <div v-if="isEditting !== 'email'">
-            <b>{{ $t('Email') }}:</b> {{ userInfo.email }}
-            <button
-              v-if="!isEditting"
-              @click="openEdit('email')"
-              class="btn btn-color-sec small-all-margin">
-              {{ $t('edit') }}
-            </button>
-        </div>
-        <!-- Edit Email -->
-        <div v-else>
-            <div class="form-group form">
-                <label class="sr-only"
-                        for="user-edit-email">
-                    {{ $t('E-mail') }}
-                </label>
-                <input type="text"
-                       class="form-control"
-                       id="user-edit-email"
-                       v-model="email"
-                       :placeholder="$t('E-mail')">
-                <div class="control-buttons">
-                    <button-spinner type="submit"
-                      :condition="pending.sendEdit"
-                            @click.prevent.native="sendEdit"
-                            class="btn btn-color-sec">
-                        {{ $t('Save') }}
-                    </button-spinner>
-                    <button class="btn btn-color-sec"
-                            @click.prevent="isEditting = null">
-                        {{ $t('Cancel') }}
-                    </button>
+            <!-- Email -->
+            <div v-if="isEditting !== 'email'">
+                <span class="text-neutral-base font-medium"><b>{{ $t('Email') }}:</b> {{ userInfo.email }}</span>
+                <button
+                  v-if="!isEditting"
+                  @click="openEdit('email')"
+                  class="underline text-secondary-base text-sm">
+                  {{ $t('edit') }}
+                </button>
+            </div>
+            <!-- Edit Email -->
+            <div v-else>
+                <div class="form-group form">
+                    <label class="sr-only"
+                            for="user-edit-email">
+                        {{ $t('E-mail') }}
+                    </label>
+                    <input type="text"
+                          class="bg-gray-50 border border-gray-300 text-neutral-base text-sm rounded-lg focus:ring-primary-dark focus:border-primary-dark block w-full p-2.5" 
+                          id="user-edit-email"
+                          v-model="email"
+                          :placeholder="$t('E-mail')">
+                    <div class="control-buttons">
+                        <button-spinner type="submit"
+                          :condition="pending.sendEdit"
+                          @click.prevent.native="sendEdit"
+                          class="cursor-pointer self-center mt-3 py-2 px-3 text-sm font-medium text-center text-white bg-secondary-light rounded-lg hover:bg-secondary-base"
+                        >
+                            {{ $t('Save') }}
+                        </button-spinner>
+                        <button
+                          class="self-center mt-3 py-2 px-3 text-sm font-medium text-center text-secondary-light border border-secondary-light rounded-lg hover:bg-secondary-base hover:text-white"
+                          @click.prevent="isEditting = null"
+                        >
+                            {{ $t('Cancel') }}
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Password -->
-        <div v-if="isEditting !== 'password'">
-            <b>{{ $t('Password') }}</b>
-            <button
-              v-if="!isEditting"
-              @click="openEdit('password')"
-              class="btn btn-color-sec small-all-margin">
-              {{ $t('edit') }}
-            </button>
-        </div>
-        <!-- Edit Password -->
-        <div v-else>
-            <form class="form pessoa-edit-password-form">
-                <div class="form-group form-inline">
-                    <label class="sr-only"
-                            for="user-edit-curr-password">
-                        {{ $t('Current password') }}
-                    </label>
-                    <input type="password"
-                        class="form-control { checkFieldError('password') }"
-                        id="user-edit-curr-password"
-                        v-model="oldPassword"
-                        :placeholder="$t('Current password')">
-                </div>
-
-                <div class="form-group form-inline">
-                    <label class="sr-only"
-                            for="user-edit-new-password">
-                        {{ $t('New password') }}
-                    </label>
-                    <input type="password"
-                            class="form-control { checkFieldError('new_password') }"
-                            id="user-edit-new-password"
-                        v-model="newPassword"
-                            :placeholder="$t('New password')">
-                </div>
-
-                <div class="form-group form-inline">
-                    <label class="sr-only"
-                            for="user-edit-confirm-password">
-                        {{ $t("Confirm new password") }}
-                    </label>
-                    <input type="password"
-                            class="form-control { checkFieldError('confirm-password') }"
-                            id="user-edit-confirm-password"
-                        v-model="newPasswordConfirm"
-                            :placeholder="$t('Confirm new password')">
-                </div>
-
-                <button-spinner type="submit"
-                      :condition="pending.sendEdit"
-                        @click.prevent.native="sendEdit"
-                        class="btn btn-color-sec">
-                    {{ $t('Save') }}
-                </button-spinner>
-                <button class="btn btn-warning"
-                        @click.prevent="isEditting = null">
-                    {{ $t('Cancel') }}
+            <!-- Password -->
+            <div v-if="isEditting !== 'password'">
+                <span class="text-neutral-base font-medium"><b>{{ $t('Password') }}</b></span>
+                <button
+                  v-if="!isEditting"
+                  @click="openEdit('password')"
+                  class="underline text-secondary-base text-sm"
+                >
+                  {{ $t('edit') }}
                 </button>
-            </form>
+            </div>
+
+            <!-- Edit Password -->
+            <div v-else>
+                <form class="form pessoa-edit-password-form">
+                    <div class="form-group form-inline">
+                        <label class="sr-only"
+                                for="user-edit-curr-password">
+                            {{ $t('Current password') }}
+                        </label>
+                        <input type="password"
+                            class="mt-2 bg-gray-50 border border-gray-300 text-neutral-base text-sm rounded-lg focus:ring-primary-dark focus:border-primary-dark block w-full p-2.5" 
+                            id="user-edit-curr-password"
+                            v-model="oldPassword"
+                            :placeholder="$t('Current password')">
+                    </div>
+
+                    <div class="form-group form-inline">
+                        <label class="sr-only"
+                                for="user-edit-new-password">
+                            {{ $t('New password') }}
+                        </label>
+                        <input type="password"
+                                class="mt-2 bg-gray-50 border border-gray-300 text-neutral-base text-sm rounded-lg focus:ring-primary-dark focus:border-primary-dark block w-full p-2.5" 
+                                id="user-edit-new-password"
+                            v-model="newPassword"
+                                :placeholder="$t('New password')">
+                    </div>
+
+                    <div class="form-group form-inline">
+                        <label class="sr-only"
+                                for="user-edit-confirm-password">
+                            {{ $t("Confirm new password") }}
+                        </label>
+                        <input type="password"
+                                class="mt-2 bg-gray-50 border border-gray-300 text-neutral-base text-sm rounded-lg focus:ring-primary-dark focus:border-primary-dark block w-full p-2.5" 
+                                id="user-edit-confirm-password"
+                            v-model="newPasswordConfirm"
+                                :placeholder="$t('Confirm new password')">
+                    </div>
+
+                    <button-spinner type="submit"
+                          :condition="pending.sendEdit"
+                          @click.prevent.native="sendEdit"
+                          class="cursor-pointer self-center mt-3 py-2 px-3 text-sm font-medium text-center text-white bg-secondary-light rounded-lg hover:bg-secondary-base"
+                          >
+                        {{ $t('Save') }}
+                    </button-spinner>
+                    <button 
+                      class="self-center mt-3 py-2 px-3 text-sm font-medium text-center text-secondary-light border border-secondary-light rounded-lg hover:bg-secondary-base hover:text-white"
+                      @click.prevent="isEditting = null"
+                    >
+                        {{ $t('Cancel') }}
+                    </button>
+                </form>
+            </div>
         </div>
+      </div>
     </div>
+
+    
 
   </div>
 </template>
@@ -182,7 +201,7 @@ export default {
   methods: {
     openEdit (field) {
       // Populate field value before openning
-      if (field !== 'password') {
+      if (field !== 'password' && ((field === 'description') !== null)) {
         this[field] = this.userInfo[field]
       }
       this.isEditting = field

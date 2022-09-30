@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <main-menu/>
-    <msg-shower/>
+    <main-menu />
+    <div class="content pt-16">
       <transition name="fade" mode="out-in">
         <keep-alive>
             <!-- <router-view name="map"></router-view> -->
@@ -16,6 +16,9 @@
           </router-view>
             <!-- </keep-alive> -->
       </transition>
+      <msg-shower/>
+    </div>
+    <footer-info />
   </div>
 </template>
 
@@ -24,12 +27,14 @@ import { mapState, mapActions } from 'vuex'
 import MainMenu from '@/components/MainMenu.vue'
 import MsgShower from '@/components/MsgShower.vue'
 import MapDespesas from '@/components/MapDespesas.vue'
+import FooterInfo from './components/FooterInfo.vue'
 
 export default {
   components: {
     MainMenu,
     MsgShower,
-    MapDespesas
+    MapDespesas,
+    FooterInfo
   },
   computed: {
     ...mapState({
@@ -125,5 +130,9 @@ export default {
 }
 .fade-enter, .fade-leave-to {
     opacity: 0;
+}
+.content {
+  min-height: 100%;
+  margin-bottom: -5rem;
 }
 </style>

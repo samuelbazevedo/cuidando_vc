@@ -1,7 +1,7 @@
 <template>
-  <div :class="{ map: true, 'map-big': big }">
+  <div class="c-map" :class="{'expanded-map': expanded }">
     <div
-      v-if="pointInfo.code && !pointInfo.geometry && !big"
+      v-if="pointInfo.code && !pointInfo.geometry && !expanded"
       class="not-mapped-msg-container"
     >
       <div class="not-mapped-msg">
@@ -15,25 +15,65 @@
       </div>
     </transition>
 
-    <year-select v-if="big" />
-
-    <div v-if="big" class="input-group search-address">
-      <input
-        id="search-address-input"
-        class="input-medium search-query form-control"
-        type="text"
-        v-model="searchAddress"
-        @keypress.enter="locateAddress"
-        :placeholder="$t('Search for an address')"
-      />
-      <span class="input-group-btn">
-        <button @click="locateAddress" class="btn btn-color-sec" type="button">
-          <img :src="$assets.lupa" />
-        </button>
-      </span>
-    </div>
-
-    <div id="map-parent-container" :class="{ 'map-big': big }">
+    <div class="map__card-content container mx-auto">
+      <div v-if="expanded" class="my-auto h-full flex flex-col justify-center max-w-md absolute">
+        <div class="bg-white p-10 mb-5 rounded-lg shadow-lg ">
+          <div class="c-map__title mb-5">
+          <h1 class="text-neutral-base text-4xl font-bold">Acompanhe os gastos públicos da cidade de São Paulo em tempo real</h1>
+          <p class="text-neutral-light text-base mt-2">O projeto Cuidando do Meu Bairro propõe tornar mais inteligível a visualização dos dados das despesas públicas a partir da geolocalização dos gastos</p>
+        </div>
+        <div class="">
+          <div class="c-map__search-address mb-5">
+              <input
+                id="search-address-input"
+                class="c-map__search-address-input form-control
+                block
+                w-full
+                p-4
+                text-base
+                font-normal
+                text-neutral-base
+                placeholder:text-neutral-base
+                bg-white bg-clip-padding
+                border border-solid border-neutral-light
+                rounded
+                transition
+                ease-in-out
+                m-0
+                focus:text-gray-700 focus:bg-white focus:border-primary-base focus:outline-none"
+                type="text"
+                v-model="searchAddress"
+                @keypress.enter="locateAddress"
+                :placeholder="$t('Search for an address')"
+                focused
+              />
+          </div>
+          <div class="c-map__year-submit grid grid-cols-2 gap-4">
+            <div>
+              <year-select class="w-44" />
+            </div>
+            <div>
+              <button class="btn w-full h-full border-2 hover:bg-primary-dark font-medium text-xs leading-tight uppercase rounded border-primary-base hover:border-primary-dark bg-primary-base text-white focus:outline-none focus:ring-0 transition duration-150 ease-in-out" type="button" @click="locateAddress">Buscar</button>
+            </div>
+          </div>
+        </div>
+        </div>
+        
+        <div class="c-map__legend flex rounded-lg shadow-lg justify-center items-center bg-white p-1">
+            <span class="text-neutral-base text-sm font-bold">{{ $t("Map legend") }}:</span>
+            <div
+              v-for="category in categories"
+              :key="category"
+              class="capitalize map-category p-2"
+            >
+              <img :src="$assets[category]" class="w-5 mx-auto" />
+              <span class="text-neutral-light text-xs">{{ $t(category) }}</span>
+            </div>
+        </div>
+      </div> 
+    </div> 
+ 
+    <div id="map-parent-container" :class="{ 'expanded-map': expanded }">
       <l-map ref="map" id="map-container" :zoom="zoom" :center="center">
         <l-tile-layer :url="url" :attribution="attribution"></l-tile-layer>
         <v-marker-cluster :options="markerClusterOptions">
@@ -47,29 +87,16 @@
         </v-marker-cluster>
       </l-map>
 
-      <div v-if="big" class="map-legend-container">
-        <div class="map-legend">
-          <b class="darker-text">{{ $t("Map legend") }}:</b>
-          <div
-            v-for="cat in categories"
-            :key="cat"
-            class="capitalize map-category"
-          >
-            <img :src="$assets[cat]" />
-            {{ $t(cat) }}
-          </div>
-        </div>
-      </div>
       <div class="map-attribution">
-        <a target="_blank" href="https://www.openstreetmap.org/copyright/pt-BR">
-          © contribuidores do OpenStreetMap
+        <a target="_blank" class="mx-5" href="https://www.openstreetmap.org/copyright/pt-BR">
+          © Contribuidores do OpenStreetMap
         </a>
       </div>
-      <div v-if="big" class="map-update-time">
+      <div v-if="expanded" class="map-update-time mx-5">
         {{ $t("source") }}:
         <a
           target="_blank"
-          href="http://orcamento.sf.prefeitura.sp.gov.br/orcamento/execucao.php"
+          href="https://orcamento.sf.prefeitura.sp.gov.br/orcamento/execucao.php"
           >Secretaria de Finanças</a
         >
       </div>
@@ -125,11 +152,6 @@ export default {
       zoom: 12,
       searchAddress: "",
       categories: ["planejado", "empenhado", "liquidado"],
-      // url: 'http://{s}.tile.osm.org/{z}/{x}/{y}.png',
-      // url: 'https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}',
-      // id: 'cuidando.nlj83mlb',
-      // accessToken: 'pk.eyJ1IjoiY3VpZGFuZG8iLCJhIjoiY2lmandrYmEzNDBqbml1bHhlZzZtbWc0MSJ9.TZYl7sV3NHwSx5fk8JHqQg',
-      // url: 'https://api.tiles.mapbox.com/v4/cuidando.nlj83mlb/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiY3VpZGFuZG8iLCJhIjoiY2lmandrYmEzNDBqbml1bHhlZzZtbWc0MSJ9.TZYl7sV3NHwSx5fk8JHqQg',
       url: "https://a.tile.openstreetmap.org/{z}/{x}/{y}.png",
       attribution:
         '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
@@ -150,8 +172,8 @@ export default {
     };
   },
   computed: {
-    // if the map should display big or not
-    big() {
+    // if the map should display expanded or not
+    expanded() {
       return this.routeName === "home";
     },
     geoJsons() {
@@ -203,3 +225,115 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+  .c-map {
+    min-width: 100%;
+    transition: all 0.5s ease-out;
+    height: 40vh;
+    display: inline-block;
+    position: relative;
+    z-index: 0;
+    &.expanded-map {
+      height: 65vh;
+    }
+  }
+  .map-update-time {
+    background-color: rgba(0,0,0,.5);
+    border-radius: 5px 5px 0 0;
+    bottom: 0;
+    color: #fff;
+    font-size: 9pt;
+    padding: 2px 10px;
+    position: absolute;
+    z-index: 1100;
+  }
+  #map-container {
+    z-index: 0;
+    height: 100%;
+  }
+  .expanded-map > #map-container {
+    height: 100%;
+  }
+  #map-parent-container{
+    height: 40vh;
+    width: 100%;
+    position: relative;
+    z-index: -100;
+    &.expanded-map {
+      width: 100%;
+      margin: 0px;
+      height: 65vh;
+      position: relative;
+    }
+  }
+  .search-address {
+    z-index: 100;
+    @media (min-width: screen-xs) {
+      right: 30px;
+      width: 370px;
+      top: 20px;
+      position: absolute;
+      border-radius: 4px;
+    }
+    @media (min-width: screen-sm) {
+      right: 130px;
+    }
+    input {
+      width: 400px;
+      border: 0px none;
+      height: 40px;
+      padding-left: 10px;
+    }
+    .btn {
+      height: 40px;
+    }
+    img {
+      height: 20px;
+    }
+  }
+  .marker-cluster { 
+    color: white;
+    background-color: none;
+    text-align: center;
+    font-size: 12pt;
+    line-height: 40px;
+    font-weight: bold;
+    background-image: url('../assets/icons/mapa/cluster.svg');
+    background-size: 100%;
+  }
+  .leaflet-control-attribution {
+    display: none;
+  }
+  .map-attribution {
+    position: absolute;
+    bottom: 0px;
+    right: 2px;
+    font-size: 7pt;
+  }
+  .map-legend-container {
+    // @extend .flex
+    width: 100%;
+    position: absolute;
+    bottom: 10px;
+    justify-content: center;
+    pointer-events: none;
+
+    .map-legend {
+      font-size: 10pt;
+      position: relative;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 10px 20px;
+      border-radius: 3px;
+      min-width: 160px;
+    }
+    .map-category {
+      margin-left: 15px;
+      display: inline-block;
+      img {
+        margin-right: 5px;
+        height: 25px;
+      }
+    }
+  }
+</style>

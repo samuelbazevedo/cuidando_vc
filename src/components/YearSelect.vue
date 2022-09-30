@@ -1,9 +1,15 @@
 <template>
-  <styled-select class="year-selector separated-caret" :options="options" :value="parseInt(year)" @input="selected"/>
+  <styled-select 
+    class="year-selector separated-caret"
+    :options="options"
+    :value="parseInt(year)"
+    @input="selected"
+  />
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex';
+
 export default {
   name: 'year-select',
   computed: {
@@ -25,6 +31,15 @@ export default {
     ...mapActions([
       'getYears'
     ])
-  }
+  },
 }
 </script>
+
+<style lang="scss" scoped>
+  .list-bare {
+    z-index: 2000;
+    border-top-width: calc(1px * calc(1 - 0));
+    border-bottom-width: calc(1px * 0);
+    width: 11rem;
+  }
+</style>

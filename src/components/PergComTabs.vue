@@ -1,24 +1,23 @@
 <template>
-  <div class="perg-com-tabs">
-    <div class="container-fluid light-dark-bg">
-      <div class="row tabs-row">
-        <div class="container">
-          <ul class="list-bare">
-            <div class="row">
-              <li :class="{ tab: true, 'is-active': tab.component === currTabComponent }"
-                v-for="(tab, i) in tabs" :key="i"
-                @click="currTabComponent = tab.component">
-                <span class="block-decorator"/>
-                <div class="number">{{ counts[tab.component] }}</div>
-                <div>{{ $t(tab.title) }}</div>
-              </li>
-            </div>
-          </ul>
-        </div>
+  <div class="perg-com-tabs py-10">
+    <div class="container light-dark-bg mx-auto">
+      <div class="mb-4">
+        <ul class="flex flex-wrap justify-around text-xl font-medium text-center text-neutral-base border-b border-gray-200">
+          <li 
+            class="tab w-1/2 cursor-pointer inline-block p-4 text-neutral-base hover:bg-gray-100 rounded-t-lg active" 
+            :class="{ 'active border-b-4 border-primary-base dark:text-primary-base': tab.component === currTabComponent }"
+            v-for="(tab, i) in tabs" :key="i"
+            @click="currTabComponent = tab.component"
+            role="tab"
+            :aria-controls="tab.component"
+          >
+            <p class="capitalize">{{ counts[tab.component] }} {{ $t(tab.title) }}</p>
+          </li>
+        </ul>
       </div>
     </div>
 
-    <div class="container tabContent">
+    <div class="container mx-auto tabContent">
       <transition name="fade" mode="out-in">
         <component :is="currTabComponent"/>
       </transition>
