@@ -22,10 +22,11 @@
                 <LazyYoutube class="mr-5" customTitle="LOA" src="https://www.youtube.com/watch?v=hdbAbKafuTU" />
                 <LazyYoutube class="mr-5" customTitle="LOA" src="https://www.youtube.com/watch?v=CWUNV7wOwYo" />
                 <LazyYoutube class="mr-5" customTitle="PPA" src="https://www.youtube.com/watch?v=hG1Vd_SsgCc" />
-                <LazyYoutube class="mr-5" customTitle="LOA" src="https://www.youtube.com/watch?v=CWUNV7wOwYo" />
-                <LazyYoutube class="mr-5" customTitle="PPA" src="https://www.youtube.com/watch?v=hG1Vd_SsgCc" />
-                <LazyYoutube class="mr-5" customTitle="LOA" src="https://www.youtube.com/watch?v=CWUNV7wOwYo" />
-                <LazyYoutube class="mr-5" customTitle="PPA" src="https://www.youtube.com/watch?v=hG1Vd_SsgCc" />
+                <LazyYoutube class="mr-5" customTitle="Despesas Públicas e Dívida Pública" src="https://www.youtube.com/watch?v=g7Xyk5sSnIU" />
+                <LazyYoutube class="mr-5" customTitle="Despesas Públicas e Dívida Pública" src="https://www.youtube.com/watch?v=Z5CtY2BlKxc&t=16s" />
+                <LazyYoutube class="mr-5" customTitle="Despesas Públicas e Dívida Pública" src="https://www.youtube.com/watch?v=-yy5NJrcX-0" />
+                <LazyYoutube class="mr-5" customTitle="Despesas Públicas e Dívida Pública" src="https://www.youtube.com/watch?v=ZcqgaEjJ7Aw&t=74s" />
+                <LazyYoutube class="mr-5" customTitle="Restos a Pagar" src="https://www.youtube.com/watch?v=o5j63z790Gs" />
             </div>
         </div>
         <div class="mt-20">
