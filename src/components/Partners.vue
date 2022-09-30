@@ -54,6 +54,13 @@
           <img src="../assets/images/logo-parceiros/colab.png" alt="COLAB" />
         </a>
       </div>
+      <div
+        class="p-6 mx-3 w-1/5 h-32 flex items-center justify-center border-2 rounded-md text-border-base"
+      >
+        <a href="">
+          <img src="../assets/images/logo-parceiros/fecap.png" alt="Fecap" />
+        </a>
+      </div>
     </div>
     <h2
       class="c-partners__title text-center text-neutral-base text-2xl font-bold my-10"

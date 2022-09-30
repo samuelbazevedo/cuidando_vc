@@ -10,6 +10,7 @@ import ModalBox from '@/components/ModalBox'
 import ButtonSpinner from '@/components/ButtonSpinner'
 import StyledSelect from '@/components/StyledSelect.vue'
 import SpinnerAnim from '@/components/SpinnerAnim'
+import LazyTube from "vue-lazytube"
 
 import 'leaflet/dist/leaflet.css'
 import 'leaflet.markercluster/dist/MarkerCluster.css'
@@ -36,10 +37,13 @@ Vue.config.productionTip = false
 
 Vue.use(Assets)
 Vue.use(VueApexCharts)
+Vue.use(LazyTube);
 Vue.component('modal-box', ModalBox)
 Vue.component('button-spinner', ButtonSpinner)
 Vue.component('styled-select', StyledSelect)
 Vue.component('spinner-anim', SpinnerAnim)
+Vue.component("LazyTube", LazyTube)
+
 
 // Allows calling function when clicked outside of an element
 // Usefull for modal and styled select
