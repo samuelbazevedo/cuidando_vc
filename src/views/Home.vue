@@ -2,7 +2,7 @@
   <div>
     <slot/>
     <div class="home pb-20 -mt-3">
-      <div class="c-home__distribution grid grid-cols-2">
+      <div class="c-home__distribution lg:grid lg:grid-cols-2">
         <div class="c-home__distribution-descrition bg-gray-100 mx-auto p-28 flex flex-col justify-center">
           <h2 class="text-neutral-base text-5xl font-bold mb-5">Quantidade e<br/> distribuição de recursos <br />por tipo em {{ year }}</h2>
           <p class="text-neutral-light text-xl">Aqui estão todas as informações sobre os gastos públicos na cidade de São Paulo. Elas são obtidas através do <a href="https://orcamento.prefeitura.sp.gov.br/orcamento/execucao.php" target="_blank" class="underline text-secondary-base">portal de transparência</a>.</p>

@@ -16,20 +16,20 @@
     </transition>
 
     <div class="map__card-content container mx-auto">
-      <div v-if="expanded" class="my-auto h-full flex flex-col justify-center max-w-md absolute">
-        <div class="bg-white p-10 mb-5 rounded-lg shadow-lg ">
+      <div v-if="expanded" class="my-auto mx-auto h-full lg:flex flex-col justify-center max-w-md lg:absolute">
+        <div class="bg-white lg:p-10 pt-10 pb-3 mb-5 lg:rounded-lg lg:shadow-lg">
           <div class="c-map__title mb-5">
-          <h1 class="text-neutral-base text-4xl font-bold">Acompanhe os gastos públicos da cidade de São Paulo em tempo real</h1>
-          <p class="text-neutral-light text-base mt-2">O projeto Cuidando do Meu Bairro propõe tornar mais inteligível a visualização dos dados das despesas públicas a partir da geolocalização dos gastos</p>
+          <h1 class="text-neutral-base lg:text-4xl lg:text-left text-center text-xl font-bold">Acompanhe os gastos públicos da cidade de São Paulo em tempo real</h1>
+          <p class="text-neutral-light lg:text-base lg:text-left text-center text-sm mt-2">O projeto Cuidando do Meu Bairro propõe tornar mais inteligível a visualização dos dados das despesas públicas a partir da geolocalização dos gastos</p>
         </div>
         <div class="">
-          <div class="c-map__search-address mb-5">
+          <div class="c-map__search-address lg:mb-5 mb-3">
               <input
                 id="search-address-input"
                 class="c-map__search-address-input form-control
                 block
                 w-full
-                p-4
+                lg:p-4
                 text-base
                 font-normal
                 text-neutral-base
@@ -59,7 +59,7 @@
         </div>
         </div>
         
-        <div class="c-map__legend flex rounded-lg shadow-lg justify-center items-center bg-white p-1">
+        <div class="c-map__legend flex rounded-lg lg:shadow-lg justify-center items-center bg-white p-1">
             <span class="text-neutral-base text-sm font-bold">{{ $t("Map legend") }}:</span>
             <div
               v-for="category in categories"

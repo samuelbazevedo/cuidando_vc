@@ -5,9 +5,9 @@
     >
       Parceiros
     </h2>
-    <div class="c-partners__list flex justify-between">
+    <div class="c-partners__list lg:flex justify-between">
       <div
-        class="p-6 mx-3 w-1/5 h-32 flex items-center justify-center border-2 rounded-md text-border-base"
+        class="p-6 mx-3 lg:w-1/5 h-32 mb-2 flex items-center justify-center border-2 rounded-md text-border-base"
       >
         <a href="">
           <img
@@ -17,7 +17,7 @@
         </a>
       </div>
       <div
-        class="p-6 mx-3 w-1/5 h-32 flex items-center justify-center border-2 rounded-md text-border-base"
+        class="p-6 mx-3 lg:w-1/5 h-32 mb-2 flex items-center justify-center border-2 rounded-md text-border-base"
       >
         <a href="" class="flex justify-center">
           <img
@@ -27,7 +27,7 @@
         </a>
       </div>
       <div
-        class="p-6 mx-3 w-1/5 h-32 flex items-center justify-center border-2 rounded-md text-border-base"
+        class="p-6 mx-3 lg:w-1/5 h-32 mb-2 flex items-center justify-center border-2 rounded-md text-border-base"
       >
         <a href="">
           <img
@@ -38,7 +38,7 @@
       </div>
       <!-- <img src="../../assets/images/logo-parceiros/" alt="Open Data for Development" /> -->
       <div
-        class="p-6 mx-3 w-1/5 h-32 flex items-center justify-center border-2 rounded-md text-border-base"
+        class="p-6 mx-3 lg:w-1/5 h-32 mb-2 flex items-center justify-center border-2 rounded-md text-border-base"
       >
         <a href="">
           <img
@@ -48,14 +48,14 @@
         </a>
       </div>
       <div
-        class="p-6 mx-3 w-1/5 h-32 flex items-center justify-center border-2 rounded-md text-border-base"
+        class="p-6 mx-3 lg:w-1/5 h-32 mb-2 flex items-center justify-center border-2 rounded-md text-border-base"
       >
         <a href="">
           <img src="../assets/images/logo-parceiros/colab.png" alt="COLAB" />
         </a>
       </div>
       <div
-        class="p-6 mx-3 w-1/5 h-32 flex items-center justify-center border-2 rounded-md text-border-base"
+        class="p-6 mx-3 lg:w-1/5 h-32 flex items-center justify-center border-2 rounded-md text-border-base"
       >
         <a href="">
           <img src="../assets/images/logo-parceiros/fecap.png" alt="Fecap" />
@@ -69,7 +69,7 @@
     </h2>
     <div class="c-partners__list flex justify-center mb-10">
       <div
-        class="p-6 mx-3 w-1/5 h-32 flex items-center justify-center border-2 rounded-md text-border-base"
+        class="p-6 mx-3 lg:w-1/5 h-32 flex items-center justify-center border-2 rounded-md text-border-base"
       >
         <a href="">
           <img
@@ -79,7 +79,7 @@
         </a>
       </div>
       <div
-        class="p-6 mx-3 w-1/5 h-32 flex items-center justify-center border-2 rounded-md text-border-base"
+        class="p-6 mx-3 lg:w-1/5 h-32 flex items-center justify-center border-2 rounded-md text-border-base"
       >
         <a href="">
           <img
