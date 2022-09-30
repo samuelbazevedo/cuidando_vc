@@ -235,7 +235,7 @@ export default {
     position: relative;
     z-index: 0;
     &.expanded-map {
-      height: 65vh;
+      height: 75vh;
     }
   }
   .map-update-time {
