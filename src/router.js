@@ -35,7 +35,7 @@ let router = new Router({
     },
     {
       path: "/glossario",
-      name: "Glossário - Orçamento Público",
+      name: "Aprenda + sobre Orçamento Público",
       component: () => import(/* webpackChunkName: "about" */ '@/views/Glossario.vue'),
     },
     {

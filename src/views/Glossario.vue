@@ -3,7 +3,7 @@
       <div class="md:container mx-auto pt-20">
         <div class="mb-5 border-b border-gray-200 pb-5">
             <h1 class="pg-about__title text-neutral-base text-4xl font-bold">
-                Conheça alguns os termos do orçamento público mais importantes
+                Entenda mais sobre orçamento público
             </h1>
         </div>
         <div href="#" class="block p-6 mb-4 max-w bg-white rounded-lg border border-gray-200 shadow-md hover:bg-gray-100">
@@ -178,6 +178,23 @@
                 </ul> 
             </div>
         </div>
+        <div>
+            <h2
+                class="c-partners__title text-neutral-base text-3xl font-bold mt-20"
+            >
+            Parceiros
+            </h2>
+            <p class="text-lg text-neutral-base pb-5 border-b border-gray-150">Nossos parceiros na construção do nosso glossário</p>
+            <div class="mt-5 mb-10">
+                <p>
+                    Elionor Jreige Weffort - Professora pesquisadora do Programa de Mestrado da FECAP - Fundação Escola de Comércio Álvares Penteado
+                </p>
+                <p>
+                    Denis Leandro Carvalho - Aluno do Programa de Mestrado da FECAP - Fundação Escola de Comércio Álvares Penteado
+                </p>
+            </div>
+        </div>
+       
       </div>
     </div>
   </template>
